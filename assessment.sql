@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 28, 2023 at 08:41 PM
+-- Generation Time: Jul 30, 2023 at 09:17 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -184,7 +184,12 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `stripe_id`, `pm_type`, `pm_last_four`, `trial_ends_at`) VALUES
 (1, 'satheesh', 'asatheeshphp@gmail.com', '2023-07-28 00:03:27', '', NULL, '2023-07-28 00:03:27', '2023-07-27 20:16:21', 'cus_OLMUIGiS4Vt5XA', NULL, NULL, NULL),
 (4, 'Test', 'testuse@gmail.com', NULL, '06a786f5026f096a862f13c63fd20f93', NULL, '2023-07-28 12:41:47', '2023-07-28 12:41:47', 'cus_OLcNvEwmb97pZP', NULL, NULL, NULL),
-(5, 'Ramesh', 'ramesh@gmail.com', NULL, '03fa8ccf6c390f14a90e9e728962de7d', NULL, '2023-07-28 13:09:09', '2023-07-28 13:09:10', 'cus_OLconstq7iuFED', NULL, NULL, NULL);
+(5, 'Ramesh', 'ramesh@gmail.com', NULL, '03fa8ccf6c390f14a90e9e728962de7d', NULL, '2023-07-28 13:09:09', '2023-07-28 13:09:10', 'cus_OLconstq7iuFED', NULL, NULL, NULL),
+(6, 'Asdasd', 'satheesh@gmail.com', NULL, '4e4d2edcf1202cf4c2cf6ade908a7026', NULL, '2023-07-30 00:26:30', '2023-07-30 00:26:33', 'cus_OMAyoqUiFulhTn', NULL, NULL, NULL),
+(7, 'Asdasdasd', 'sat@gmail.com', NULL, '98d3e4c69a87b5aedd0ae860b46ebaa6', NULL, '2023-07-30 00:50:48', '2023-07-30 00:50:49', 'cus_OMBMZmVSlF1Ud6', NULL, NULL, NULL),
+(8, 'Sat', 'sat@gmai.com', NULL, 'd3f99ca859e605279ac23f97e33c3ea5', NULL, '2023-07-30 10:36:31', '2023-07-30 10:36:35', 'cus_OMKoB1rQBC844x', NULL, NULL, NULL),
+(9, 'Ram', 'ram@gmail.com', NULL, '9001587b0fed20a2cb33e43a51bb3f83', NULL, '2023-07-30 10:59:11', '2023-07-30 10:59:12', 'cus_OMLA9NvMNRsvcN', NULL, NULL, NULL),
+(10, 'Sss', 'sss@gmail.com', NULL, 'ad7f517159350ae1997713b686130c98', NULL, '2023-07-30 13:22:30', '2023-07-30 13:22:30', 'cus_OMNUuxysy2lAKP', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -291,7 +296,7 @@ ALTER TABLE `subscription_items`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
