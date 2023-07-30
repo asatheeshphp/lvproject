@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
    <style>
       input {
          width: 100%;
@@ -60,7 +60,7 @@
                      @endif
                      <br>
 
-                     <form id="payment-form" action="{{ route('payment.process') }}" method="post">
+                     <form id="payment-form" name="payment-form" action="{{ route('payment.process') }}" method="post">
                            @csrf
                            <input type="hidden" name="payment_id" id="payment_id" value="">
                            <input type="hidden" name="product_id" id="product_id" value="{{ $product_details->id }}"
@@ -74,7 +74,7 @@
                            </div>
                            <div id="card-errors" role="alert"></div>
                            <br>
-                           <button type="button" id="card-button" class="btn btn-primary btn-lg btn-block">Pay Now</button>
+                           <button type="submit" id="card-button" class="btn btn-primary btn-lg btn-block">Pay Now</button>
                      </form>
                   <br>
             </div>
@@ -91,19 +91,21 @@
 <script>
      
         $(document).ready(function() {
+            
             $("#payment-form").validate({
                 rules: {
                     name: {
-                     required:true,
-                     minlength:3,
+                    required:true,
+                    minlength:3,
                     },
                     email: {
-                     required:true,
-                     email:true
+                    required:true,
+                    email:true
                     },
-                 
+                
                 },
             });
+            
         });
     </script>
 
@@ -136,8 +138,6 @@
 
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
-
-
         const {
             token,
             error
@@ -170,7 +170,8 @@
         );
     
         if (error) {
-            // Display "error.message" to the user...
+            //error message to user if card details related issues
+            //alert("Please enter valid card details to continue");
         } else {
             document.getElementById('payment_id').value = paymentMethod.id;
             document.getElementById('payment-form').submit();
