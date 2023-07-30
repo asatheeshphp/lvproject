@@ -41,14 +41,14 @@
                 <div class="col">            
                     <div class="product-thumb">
                         <div class="image"><a href="javascript:;" alt="{{$prodct->name}}" title="{{$prodct->name}}" class="img-fluid">
-                        <img style="width: 120px;height:120px;" src="https://exquise.anecdote.id/wp-content/uploads/2020/08/Dummy-Product.jpeg" alt="{{$prodct->name}}" title="{{$prodct->name}}" class="img-fluid">
+                        <img style="width: 100px;height:120px;" src="{{ URL::to('/') }}/images/product.jpeg" alt="{{$prodct->name}}" title="{{$prodct->name}}" class="img-fluid">
                         </a></div>
                         <div class="content">
                             <div class="description" style="min-height: 225px;">
                                 <h4><a href="{{ route('productdetails.show',['id'=>$prodct->id])}}">{{$prodct->name}}</a></h4>
                                 <p>{{$prodct->description}}</p>
                                 <div class="price">
-                                    <span class="price-new">&euro; {{$prodct->price}}</span>
+                                    <span class="price-new">INR {{$prodct->price}}</span>
                                 </div>
                             </div>
                             <div class="button-group">

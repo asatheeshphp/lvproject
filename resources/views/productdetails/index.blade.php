@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.min.js"></script>
 
    <style>
       input {
@@ -36,7 +35,7 @@
                 <div class="image magnific-popup">
                     <a  href="javascript:;"
                         title="{{ $product_details->name }}"><img
-                            src="https://exquise.anecdote.id/wp-content/uploads/2020/08/Dummy-Product.jpeg"
+                            src="{{ URL::to('/') }}/images/product.jpeg"                            
                             title="{{ $product_details->name }}" alt="{{ $product_details->name }}" style="padding: 100px 180px;" class="img-thumbnail mb-3"></a>
 
                 </div>
@@ -63,6 +62,7 @@
 
                      <form id="payment-form" action="{{ route('payment.process') }}" method="post">
                            @csrf
+                           <input type="hidden" name="payment_id" id="payment_id" value="">
                            <input type="hidden" name="product_id" id="product_id" value="{{ $product_details->id }}"
                               <label for="card-element">
                                <h4>Please enter the credit card details to proceed</h4>
@@ -74,7 +74,7 @@
                            </div>
                            <div id="card-errors" role="alert"></div>
                            <br>
-                           <button type="submit" class="btn btn-primary btn-lg btn-block">Pay Now</button>
+                           <button type="button" id="card-button" class="btn btn-primary btn-lg btn-block">Pay Now</button>
                      </form>
                   <br>
             </div>
@@ -108,12 +108,12 @@
     </script>
 
 <script>
-    const stripe = Stripe(
-        'pk_test_51NXpAxSJD8qqmpJdrbKZ6NzD5wf3WHsQVswwBdxFYvUFBcE1vSnL8HTTtosqYr0xknuWvQ2qYSVi4HUxzE3HNsPn00aCyufiBU'
-        );
+    var public_key = '{{ env("STRIPE_PUBLIC_KEY") }}';
+    const stripe = Stripe(public_key);
+    
     const elements = stripe.elements();
 
-    const card = elements.create('card', {
+    const cardElement = elements.create('card', {
         style: {
             base: {
                 iconColor: '#666EE8',
@@ -129,7 +129,7 @@
         }
     });
 
-    card.mount('#card-element');
+    cardElement.mount('#card-element');
 
     const form = document.getElementById('payment-form');
     const cardErrors = document.getElementById('card-errors');
@@ -141,7 +141,7 @@
         const {
             token,
             error
-        } = await stripe.createToken(card);
+        } = await stripe.createToken(cardElement);
 
         if (error) {
             // Display the error message to the user
@@ -158,11 +158,24 @@
             form.submit();
         }
     });
+
+    const cardHolderName = document.getElementById('card-holder-name');
+    const cardButton = document.getElementById('card-button');
+    
+    cardButton.addEventListener('click', async (e) => {
+        const { paymentMethod, error } = await stripe.createPaymentMethod(
+            'card', cardElement, {
+                billing_details: { name: cardHolderName.value }
+            }
+        );
+    
+        if (error) {
+            // Display "error.message" to the user...
+        } else {
+            document.getElementById('payment_id').value = paymentMethod.id;
+            document.getElementById('payment-form').submit();
+            // The card has been verified successfully...
+        }
+    });
 </script>
-
-
-
-
-
-
 </html>

@@ -18,19 +18,16 @@ use App\Http\Controllers;
 
 //route for load products page
 Route::controller(ProductController::class)->group(static function (): void {
+    Route::get('/','index');//for default page
     Route::get('/products','index');
 });
 
-//route for load product details along with product id
-// Route::controller(ProductdetailsController::class)->group(static function (): void {
-//     Route::get('productdetails/{id}','show');
-// });
-
+//route for product details page
 use App\Http\Controllers\ProductdetailsController;
 Route::get('/productdetails/{id}', [ProductdetailsController::class, 'show'])->name('productdetails.show');
 
 
-use App\Http\Controllers\PaymentController;
 //route for process the payment 
+use App\Http\Controllers\PaymentController;
 Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
-Route::get('/create', [PaymentController::class, 'create'])->name('payment.create');
+Route::get('/response', [PaymentController::class, 'response'])->name('payment.response');
